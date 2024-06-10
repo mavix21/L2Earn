@@ -1,5 +1,5 @@
 ﻿using L2Earn.Domain.Abstractions;
-using L2Earn.Domain.Lessons;
+
 namespace L2Earn.Domain.Lessons
 {
     public sealed class Lesson : Entity
@@ -12,8 +12,8 @@ namespace L2Earn.Domain.Lessons
             LessonDetail detail,
             int duration,
             bool isPaid,
-            LessonVideoUrl videoUrl
-
+            LessonVideoUrl videoUrl,
+            bool isActive
         ) : base(id)
         {
             ModuleId = moduleId;
@@ -23,6 +23,7 @@ namespace L2Earn.Domain.Lessons
             Duration = duration;
             IsPaid = isPaid;
             VideoUrl = videoUrl;
+            IsActive = isActive;
         }
         public Guid ModuleId { get; private set; }
         public LessonName Name { get; private set; }
@@ -31,6 +32,7 @@ namespace L2Earn.Domain.Lessons
         public int Duration { get; private set; }
         public bool IsPaid { get; private set; }
         public LessonVideoUrl VideoUrl { get; private set; }
+        public bool IsActive { get; private set; }
 
         public static Lesson Create(
             Guid moduleId,
@@ -39,10 +41,11 @@ namespace L2Earn.Domain.Lessons
             LessonDetail detail,
             int duration,
             bool isPaid,
-            LessonVideoUrl videoUrl
+            LessonVideoUrl videoUrl,
+            bool isActive
         )
         {
-            return new Lesson(Guid.NewGuid(), moduleId, name, order, detail, duration, isPaid, videoUrl);
+            return new Lesson(Guid.NewGuid(), moduleId, name, order, detail, duration, isPaid, videoUrl, isActive);
         }
 
     }
