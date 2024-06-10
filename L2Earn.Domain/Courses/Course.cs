@@ -3,9 +3,11 @@
 public sealed class Course
 {
     public CourseId Id { get; private set; }
-    public string Name { get; private set; }
+    public Title Title { get; private set; }
+    public Headline Headline { get; private set; }
+    public ImageUrl ImageUrl { get; private set; }
     public string Description { get; private set; }
-    public string ImageUrl { get; private set; }
-    public string Author { get; private set; }
-    public bool IsProgressLimited { get; private set; }
+    public bool IsPublished { get; private set; }
+    public bool IsPaid { get; private set; }
+    public DateTime CreatedOn { get; private set; }
 }
