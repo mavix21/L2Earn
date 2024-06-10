@@ -6,6 +6,7 @@ namespace L2Earn.Domain.Lessons
     {
         private Lesson(
             Guid id,
+            Guid moduleId,
             LessonName name,
             int order,
             LessonDetail detail,
@@ -15,6 +16,7 @@ namespace L2Earn.Domain.Lessons
 
         ) : base(id)
         {
+            ModuleId = moduleId;
             Name = name;
             Order = order;
             Detail = detail;
@@ -22,6 +24,7 @@ namespace L2Earn.Domain.Lessons
             IsPaid = isPaid;
             VideoUrl = videoUrl;
         }
+        public Guid ModuleId { get; private set; }
         public LessonName Name { get; private set; }
         public int Order { get; private set; }
         public LessonDetail Detail { get; private set; }
@@ -30,6 +33,7 @@ namespace L2Earn.Domain.Lessons
         public LessonVideoUrl VideoUrl { get; private set; }
 
         public static Lesson Create(
+            Guid moduleId,
             LessonName name,
             int order,
             LessonDetail detail,
@@ -38,7 +42,7 @@ namespace L2Earn.Domain.Lessons
             LessonVideoUrl videoUrl
         )
         {
-            return new Lesson(Guid.NewGuid(), name, order, detail, duration, isPaid, videoUrl);
+            return new Lesson(Guid.NewGuid(), moduleId, name, order, detail, duration, isPaid, videoUrl);
         }
 
     }
