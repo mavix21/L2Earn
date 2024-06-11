@@ -47,7 +47,6 @@ namespace L2Earn.Domain.Lessons
         {
             return new Lesson(Guid.NewGuid(), moduleId, name, order, detail, duration, isPaid, videoUrl, isActive);
         }
-
     }
 }
 
