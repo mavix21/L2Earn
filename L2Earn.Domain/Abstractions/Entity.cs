@@ -1,7 +1,8 @@
-﻿namespace L2Earn.Domain.Abstractions
+﻿using StronglyTypedIds;
+
+namespace L2Earn.Domain.Abstractions;
+
+public abstract class Entity<T>(T id)
 {
-    public abstract class Entity(Guid id)
-    {
-        Guid Id { get; init; } = id;
-    }
+    T Id { get; init; } = id;
 }

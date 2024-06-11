@@ -1,15 +1,19 @@
 ﻿using L2Earn.Domain.Abstractions;
+using StronglyTypedIds;
 
 namespace L2Earn.Domain.Users;
 
-public class User : Entity
+[StronglyTypedId]
+public partial struct UserId { }
+
+public class User : Entity<UserId>
 {
     private User(
-        Guid id,
+        UserId id,
         WalletAddress walletAddress,
         Username username,
         ProfilePhoto profilePhoto
-        ) : base(id)
+    ) : base(id)
     {
         Id = id;
         WalletAddress = walletAddress;
@@ -17,7 +21,7 @@ public class User : Entity
         ProfilePhoto = profilePhoto;
     }
 
-    public Guid Id { get; private set; }
+    public UserId Id { get; private set; }
     public Username Username { get; private set; }
     public ProfilePhoto ProfilePhoto { get; private set; }
     public WalletAddress WalletAddress { get; private set; }
@@ -27,7 +31,7 @@ public class User : Entity
         Username username,
         ProfilePhoto profilePhoto
     ) => new(
-        Guid.NewGuid(),
+        UserId.New(),
         walletAddress,
         username,
         profilePhoto
