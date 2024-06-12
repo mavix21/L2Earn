@@ -10,36 +10,37 @@ public sealed class Course : AggregateRoot<CourseId>
 {
     private Course(
         CourseId id,
-        Title title,
+        CourseTitle title,
         Headline headline,
-        ImageUrl imageUrl,
+        Thumbnail thumbnail,
         string description,
+        Difficulty difficulty,
         bool isPublished,
         bool isPaid,
         List<Module> modules,
         DateTime createdOn
     ) : base(id)
     {
-        Id = id;
         Title = title;
         Headline = headline;
-        ImageUrl = imageUrl;
+        Thumbnail = thumbnail;
         Description = description;
+        Difficulty = difficulty;
         IsPublished = isPublished;
         IsPaid = isPaid;
         Modules = modules;
         CreatedOn = createdOn;
     }
 
-    public CourseId Id { get; private set; }
-
-    public Title Title { get; private set; }
+    public CourseTitle Title { get; private set; }
 
     public Headline Headline { get; private set; }
 
-    public ImageUrl ImageUrl { get; private set; }
+    public Thumbnail Thumbnail { get; private set; }
 
     public string Description { get; private set; }
+
+    public Difficulty Difficulty { get; private set; }
 
     public bool IsPublished { get; private set; }
 
@@ -50,23 +51,32 @@ public sealed class Course : AggregateRoot<CourseId>
     public DateTime CreatedOn { get; private set; }
 
     public static Course Create(
-        Title title,
+        CourseTitle courseTitle,
         Headline headline,
-        ImageUrl imageUrl,
+        Thumbnail thumbnail,
         string description,
+        Difficulty difficulty,
         bool isPublished,
         bool isPaid,
         List<Module> modules,
         DateTime createdOn
     ) => new(
         CourseId.New(),
-        title,
+        courseTitle,
         headline,
-        imageUrl,
+        thumbnail,
         description,
+        difficulty,
         isPublished,
         isPaid,
         modules,
         createdOn
     );
+
+    public Module CreateModule(
+        ModuleName name,
+        ModuleSummary summary,
+        List<Lesson> lessons,
+        bool isActive
+    ) => Module.Create(Id, name, summary, lessons, isActive);
 }
